@@ -41,7 +41,7 @@ describe('Listing cities on /cities', function() {
   it('Returns an index file with Cities', function(done) {
     request(app)
     .get('/')
-    .expect(/cities/i, done);
+    .expect(/cities/i, done); // can't get it exactly
   });
 
 });
