@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./bin/www.js",
-    "test": "mocha test.js"
+    "test": "set NODE_ENV=test && mocha -w app.js test.js"
   },
   "author": "",
   "license": "ISC",
