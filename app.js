@@ -44,6 +44,10 @@ app.get('/cities', function(request, response) {
 
 app.post('/cities', urlencoded, function(request, response) {
   var newCity = request.body;
+  if(!newCity.name || !newCity.description) {
+    response.sendStatus(400);
+    return false;
+  }
   // * redis
   // client.hset('cities', newCity.name, newCity.description, function(error) {
   //   if(error) throw error;

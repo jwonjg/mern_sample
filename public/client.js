@@ -33,7 +33,7 @@ $(function(){
       list.push($('<li>', { html: content }));
     }
 
-    $('.city-list').append(list)
+    $('.city-list').append(list);
   }
 
 

@@ -55,15 +55,22 @@ describe('Creating new cities', function() {
   it('Returns a 201 status code', function(done) {
     request(app)
       .post('/cities')
-      .send('name=Springfield$description=where+the+simpsons+live')
+      .send('name=Springfield&description=where+the+simpsons+live')
       .expect(201, done);
   });
 
   it('Return the city name', function(done) {
     request(app)
     .post('/cities')
-    .send('name=Springfield$description=where+the+simpsons+live')
+    .send('name=Springfield&description=where+the+simpsons+live')
     .expect(/springfield/i, done);
+  });
+
+  it('Validates city name and describe', function(done) {
+    request(app)
+      .post('/cities')
+      .send('name=&description=')
+      .expect(400, done);
   });
 });
 
