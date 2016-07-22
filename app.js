@@ -66,4 +66,20 @@ app.delete('/cities/:name', function(request, response) {
   response.sendStatus(204);
 });
 
+app.get('/cities/:name', function(request, response) {
+  // * redis
+  // client.hset('cities', request.params.name, function(error, description) {
+  //   if(error) throw error;
+  //   response.render('show.ejs',
+  //     {city:
+  //       {name: request.params.name, description:description}
+  //     });
+  // });
+  response.render('show.ejs',
+  {city:
+    {name: request.params.name, description:cities[request.params.name]}
+  });
+
+});
+
 module.exports = app;
