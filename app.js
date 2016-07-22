@@ -14,8 +14,8 @@ app.use(express.static('public')); // default index property is 'index.html'
 //   client.auth(rtg.auth.split(":")[1]);
 // } else {
 //   var client = redis.createClient();
+//   client.select((process.env.NODE_ENV || 'development').length);
 // }
-// client.select((process.env.NODE_ENV || 'development').length);
 
 // * redis
 // client.hset('cities', 'Lotopia', 'some description');
@@ -51,6 +51,15 @@ app.post('/cities', urlencoded, function(request, response) {
   // });
   cities[newCity.name] = newCity.description;
   response.status(201).json(newCity.name);
+});
+
+app.delete('/cities/:name', function(request, response) {
+  // client.hdel('cities', request.params.name, function(error) {
+  //   if(error) throw error;
+  //   response.sendStatus(204);
+  // });
+  delete cities[request.params.name];
+  response.sendStatus(204);
 });
 
 module.exports = app;

@@ -66,3 +66,19 @@ describe('Creating new cities', function() {
     .expect(/springfield/i, done);
   });
 });
+
+describe('Deleting cities', function() {
+  // * redis
+  // before(function(){
+  //   client.hset('cities', 'Banana', 'a tasty fruit');
+  // });
+  // after(function(){
+  //   client.flushdb();
+  // });
+
+  it('Returns a 204 status code', function(done) {
+    request(app)
+      .delete('/cities/Lotopia')
+      .expect(204, done);
+  });
+});
