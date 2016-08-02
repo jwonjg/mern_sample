@@ -1,6 +1,12 @@
 var express = require('express');
-var app = express();
+path = require('path');
 
+var db = require(path.join(__dirname, 'models', 'db'));
+
+// Connect to mongodb
+db.connect();
+
+var app = express();
 
 app.use(express.static('public')); // default index property is 'index.html'
 

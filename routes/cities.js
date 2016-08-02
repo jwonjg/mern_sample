@@ -18,11 +18,13 @@ var urlencoded = bodyParser.urlencoded({ extended: false});
 // client.hset('cities', 'Caspiana', 'some description');
 // client.hset('cities', 'Indigo', 'some description');
 
-var initCities = {
-  'Lotopia':'some description',
-  'Caspiana':'some description',
-  'Indigo':'some description'
-};
+var schema = require(path.join(__dirname, '../models', 'schema'));
+
+var City = schema.City;
+
+new City({name: 'Lotopia', description: 'some description about Lotopia', regDate: Date.now()}).save();
+new City({name: 'Caspiana', description: 'some description about Caspiana', regDate: Date.now()}).save();
+new City({name: 'Indigo', description: 'some description about Indigo', regDate: Date.now()}).save();
 
 // unreachable. cause default index property takes request
 // app.get('/', function(request, response) {
