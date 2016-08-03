@@ -22,9 +22,9 @@ var schema = require(path.join(__dirname, '../models', 'schema'));
 
 var City = schema.City;
 
-new City({name: 'Lotopia', description: 'some description about Lotopia', regDate: Date.now()}).save();
-new City({name: 'Caspiana', description: 'some description about Caspiana', regDate: Date.now()}).save();
-new City({name: 'Indigo', description: 'some description about Indigo', regDate: Date.now()}).save();
+City.findOneAndUpdate({name : 'Lotopia'}, {name: 'Lotopia', description: 'some description about Lotopia', regDate : Date.now() }, {upsert:true}, function(){});
+City.findOneAndUpdate({name : 'Caspiana'}, {name: 'Caspiana', description: 'some description about Caspiana', regDate : Date.now() }, {upsert:true}, function(){});
+City.findOneAndUpdate({name : 'Indigo'}, {name: 'Indigo', description: 'some description about Indigo', regDate : Date.now() }, {upsert:true}, function(){});
 
 // unreachable. cause default index property takes request
 // app.get('/', function(request, response) {
