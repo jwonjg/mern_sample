@@ -73,8 +73,15 @@ router.route('/')
     //   if(error) throw error;
     //   response.status(201).json(newCity.name);
     // });
-    initCities[newCity.name] = newCity.description;
-    response.status(201).json(newCity.name);
+    City.findOrCreate(newCity, function(error, city) {
+      if(error) throw error;
+      console.log("inserted:"+city);
+      if(city) {
+        // do nothing
+      } else {
+        response.status(201).json(newCity.name);
+      }
+    });
   });
 
 router.route('/:name')
@@ -83,7 +90,10 @@ router.route('/:name')
     //   if(error) throw error;
     //   response.sendStatus(204);
     // });
-    delete initCities[request.params.name];
+    City.removeByArgs(request.params.name, function(error, city) {
+      if(error) throw error;
+      console.log("deleted:"+city);
+    });
     response.sendStatus(204);
   })
   .get(function(request, response) {
@@ -95,9 +105,8 @@ router.route('/:name')
     //       {name: request.params.name, description:description}
     //     });
     // });
-    response.render('show.ejs',
-    {city:
-      {name: request.params.name, description:initCities[request.params.name]}
+    City.findByArgs({name: request.params.name}, function(error, cityArr) {
+      response.render('show.ejs', {city: cityArr[0]});
     });
   });
 

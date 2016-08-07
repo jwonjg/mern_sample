@@ -10,14 +10,20 @@ CitySchema.statics.findOrCreate = function(args, cb) {
   var query = {name : args.name};
   var newCity = {name: args.name, description: args.description, regDate : Date.now() };
   var options = {upsert:true, returnNewDocument: true, setDefaultsOnInsert: true};
-  return this.findOneAndUpdate(query, newCity, options, function(err, res){
-    cb(err, res.value);
+  return this.findOneAndUpdate(query, newCity, options, function(err, oldCity){
+    cb(err, oldCity);
   });
 };
 
 CitySchema.statics.findByArgs = function(args, cb) {
-  return this.find(args, function(err, res){
-    cb(err, res.value);
+  return this.find(args, function(err, cities){
+    cb(err, cities);
+  });
+};
+
+CitySchema.statics.removeByArgs = function(args, cb) {
+  return this.findOneAndRemove(args, function(err, city){
+    cb(err, city);
   });
 };
 
