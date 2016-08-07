@@ -22,9 +22,22 @@ var schema = require(path.join(__dirname, '../models', 'schema'));
 
 var City = schema.City;
 
-City.findOneAndUpdate({name : 'Lotopia'}, {name: 'Lotopia', description: 'some description about Lotopia', regDate : Date.now() }, {upsert:true}, function(){});
-City.findOneAndUpdate({name : 'Caspiana'}, {name: 'Caspiana', description: 'some description about Caspiana', regDate : Date.now() }, {upsert:true}, function(){});
-City.findOneAndUpdate({name : 'Indigo'}, {name: 'Indigo', description: 'some description about Indigo', regDate : Date.now() }, {upsert:true}, function(){});
+// City.findOneAndUpdate({name : 'Lotopia'}, {name: 'Lotopia', description: 'some description about Lotopia', regDate : Date.now() }, {upsert:true}, function(){});
+// City.findOneAndUpdate({name : 'Caspiana'}, {name: 'Caspiana', description: 'some description about Caspiana', regDate : Date.now() }, {upsert:true}, function(){});
+// City.findOneAndUpdate({name : 'Indigo'}, {name: 'Indigo', description: 'some description about Indigo', regDate : Date.now() }, {upsert:true}, function(){});
+City.findOrCreate({name: 'Lotopia', description: 'some description about Lotopia'}, function(error, city) {
+  if(error) throw error;
+});
+City.findOrCreate({name: 'Caspiana', description: 'some description about Caspiana'}, function(error, city) {
+  if(error) throw error;
+});
+City.findOrCreate({name: 'Indigo', description: 'some description about Indigo'}, function(error, city) {
+  if(error) throw error;
+});
+City.findOrCreate({name: 'Seoul', description: 'some description about Seoul'}, function(error, city) {
+  if(error) throw error;
+});
+
 
 // unreachable. cause default index property takes request
 // app.get('/', function(request, response) {
@@ -40,7 +53,14 @@ router.route('/')
     //   if(error) throw error;
     //   response.json(names);
     // });
-    response.json(Object.keys(initCities));
+    City.findByArgs({}, function(error, cities) {
+      if(error) throw error;
+      var cityNames = [];
+      cities.forEach(function(city) {
+        cityNames.push(city.name);
+      });
+      response.json(cityNames);
+    });
   })
   .post(urlencoded, function(request, response) {
     var newCity = request.body;

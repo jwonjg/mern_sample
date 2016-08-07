@@ -6,7 +6,7 @@ exports.connect = function() {
   }
 
   var dbURI;
-  if(process.env.MONGODB_URI) {
+  if(process.env.MONGODB_URI) { //  heroku config 에서 mongodb uri 속성에 설정된 값이 있는 경우
     dbURI = process.env.MONGODB_URI+'/'+(process.env.NODE_ENV || 'dev');
   } else {
     dbURI = 'mongodb://localhost/'+(process.env.NODE_ENV || 'dev');
