@@ -1,5 +1,5 @@
 var request = require('supertest');
-var app = require('./app');
+var app = require('./src/app');
 
 // * redis
 // var redis = require('redis');
@@ -110,7 +110,7 @@ describe('Shows city info', function() {
   });
   it('Returns information for given city', function(done) {
     request(app)
-    .get('/cities/Indigo')
+    .get('/cities/INn')
     .expect(/some/, done);
   });
 });

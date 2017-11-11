@@ -48,6 +48,7 @@ var router = express.Router();
 
 router.route('/')
   .get(function(request, response) {
+
     // * redis
     // client.hkeys('cities', function(error, names) {
     //   if(error) throw error;
